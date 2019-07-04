@@ -1,0 +1,88 @@
+*{
+    box-sizing: border-box;
+}
+.container {
+    width: 1200px;
+    height: 100vh;
+    margin: 0 auto;
+    padding: 1%;
+}
+.container:after{
+    content: '';
+    display: table;
+    clear: both;
+}
+.container .users__niks {
+    width: 29%;
+    height: 100%;
+    padding: 10px;    
+    float: left;
+    background-color: #FFA07A;
+}
+.container .users__messages {
+    position: relative;
+    float: right;
+    width: 69%;
+    padding: 10px;
+    height: 100%;
+    background-color: #FFFFF0;
+}
+.users__messages #messages{
+    padding-left: 10px;
+    overflow-y: scroll;
+    max-height: 90%;
+} 
+.users__messages .message__send{
+    position: absolute;
+    left: 15px;
+    right: 15px;
+    bottom: 15px;
+}
+.users__messages .message__send:after{
+    content: '';
+    display: table;
+    clear: both;
+}
+.users__messages .mess{
+    padding: 10px 20px;
+    border-radius: 15px;
+    border: 1px solid #C0C0C0;
+    float: left;
+    width: 80%;
+}
+.users__messages .btn{
+    padding: 10px 20px;
+    border-radius: 15px;
+    border: none;
+    background-color: #FFA07A;
+    color: #ffffff;
+    font-weight: bold;
+    cursor: pointer;
+    float: right;
+}
+.users__messages .btn:hover{
+    background-color: #D2691E;
+}
+/*****************     Сообщения - стили    *******************/
+.user__message {
+    display: flex;
+    flex-wrap: nowrap;
+    margin: 10px auto;
+    width: 100%;
+}
+.user__message .user__photo {
+    border-radius: 100%;
+    align-self: center;
+    background-color: aqua;
+    width: 80px;
+    height: 80px;
+    background-size: cover;
+    background-position: center;
+}
+.user__message .user__text {
+    margin-left: 20px;    
+    width: 600px;
+}
+.user__message span {
+    font-weight: bold;
+}

@@ -1,0 +1,9 @@
+extends layout
+
+block content
+    .authorization
+        p Авторизация
+        form(action="").authorization__form
+            input(type="text" name="name" placeholder="ФИО").input
+            input(type="text" name="nik" placeholder="Ник").input
+            button.authorization__btn Войти

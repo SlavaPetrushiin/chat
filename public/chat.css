@@ -19,6 +19,23 @@
     float: left;
     background-color: #FFA07A;
 }
+.users__niks .user__info{
+    display: flex;
+    flex-wrap: nowrap;
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: bold
+}
+.user__info-photo{
+    align-self: center;
+    margin-right: 15px;
+    cursor: pointer;
+}
+.user__info p{
+    align-self: center;
+    max-width: 220px;
+    width: 100%;
+}
 .container .users__messages {
     position: relative;
     float: right;
@@ -63,6 +80,25 @@
 .users__messages .btn:hover{
     background-color: #D2691E;
 }
+/****************    Участники стили      *********************/
+
+.users{
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 18px;
+    font-weight: bold;
+    padding-left: 5px;
+    list-style-type: none;
+}
+.users .user{
+    text-transform: none;
+    letter-spacing: 1px;
+    font-weight: normal;
+    margin: 5px 10px 5px 20px; 
+    
+}
+
 /*****************     Сообщения - стили    *******************/
 .user__message {
     display: flex;
@@ -70,7 +106,7 @@
     margin: 10px auto;
     width: 100%;
 }
-.user__message .user__photo {
+.user__photo {
     border-radius: 100%;
     align-self: center;
     background-color: aqua;
@@ -78,6 +114,7 @@
     height: 80px;
     background-size: cover;
     background-position: center;
+    border: none;
 }
 .user__message .user__text {
     margin-left: 20px;    
@@ -85,4 +122,57 @@
 }
 .user__message span {
     font-weight: bold;
+}
+
+
+/*****************/
+
+.uploadPhoto {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 99999;
+    width: 450px;
+    height: 450px;
+    margin: 20px auto;
+    background-color: #DCDCDC;
+    font-size: 18px;
+    letter-spacing: 2px;
+    padding: 20px 10px 10px 10px;
+    border-radius: 15px;
+    display: none;
+}
+.uploadPhoto .uploadPhoto__text {
+}
+.uploadPhoto .uploadPhoto__block {
+    padding-top: 15px;
+    border-radius: 15px;
+    background-color: #ffffff;
+}
+.uploadPhoto .photo__block {
+    width: 250px;
+    height: 250px;
+    border: 2px dotted #DCDCDC;
+    margin: 20px auto;
+    border-radius: 15px;
+    background-size: cover;
+    background-position: center;    
+}
+.uploadPhoto .photo__btn {
+    text-align: right;
+    
+}
+.uploadPhoto .btn__photo {
+    padding: 10px 20px;
+    border-radius: 15px;
+    background-color: #F4A460;
+    border: none;
+    color: #ffffff;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 10px 5px 10px 5px;
+}
+.photo__active{
+    border-color: gold;
 }

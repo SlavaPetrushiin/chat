@@ -5,11 +5,17 @@ const fs = require("fs");
 
 const app = express();
 
+app.set("view engine", "pug");
+
 // создаем парсер для данных application/x-www-form-urlencoded
 const urlencodedParser = bodyParser.urlencoded({extended: false});
 
-const server = app.listen(3000, function(){
-    console.log('listening for requests on port 3000,');
+// Массив со всеми подключениями
+const  connections =  [];
+let count = 0;
+
+const server = app.listen(3001, function(){
+    console.log('listening for requests on port 3001,');
 })
 
 // Static files
@@ -19,18 +25,48 @@ const io = socket(server);
 
 app.post("/", urlencodedParser, function (request, response) {
     if(!request.body) return response.sendStatus(400);
-    console.log(request.body);
-    response.sendFile(__dirname + "/public/chat.html", request.body);
+    connections.push({name: request.body.name,  nik: request.body.nik});
+    response.render("chat", {
+        name: request.body.name,
+        nik: request.body.nik
+    });
 });
   
 app.get("/", function(request, response){
-    response.sendFile(__dirname + "/register.html");
+    response.render("register");
 });
 
 
 io.on('connection', function(socket){
-  socket.on('chat message', function(msg){
-    io.emit('chat message', msg);
-  });
+    const id = socket.id;
+    console.log("Успешное соединение");
+    connections[count].id = id;
+    count++;
+    io.emit('connectionUser', connections);
+    
+	socket.on('disconnect', function(data) {
+		// Удаления пользователя из массива
+        const indexOf = disconnectUser(connections, id);
+		connections.splice(indexOf, 1);
+		console.log("Отключились");
+        count--;
+        io.emit('disconnectUser', connections);
+	});    
+    
+    socket.on('chat message', function(data){
+        console.log(data)
+        io.emit('send message', data);
+    });
 });
 
+function disconnectUser(connections, id){
+	let indexOf;
+	connections.forEach((item, i) =>{
+		for (let key in item){
+			if(item[key] === id){
+				indexOf = i;
+			};
+		};
+	});
+	return indexOf;
+}

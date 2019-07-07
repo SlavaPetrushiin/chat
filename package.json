@@ -1,7 +1,6 @@
 {
   "name": "new_chat",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -11,6 +10,17 @@
   "dependencies": {
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
+    "pug": "^2.0.4",
     "socket.io": "^2.2.0"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SlavaPetrushiin/chat.git"
+  },
+  "bugs": {
+    "url": "https://github.com/SlavaPetrushiin/chat/issues"
+  },
+  "homepage": "https://github.com/SlavaPetrushiin/chat#readme",
+  "description": ""
 }

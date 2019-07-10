@@ -151,8 +151,8 @@
     background-color: #ffffff;
 }
 .uploadPhoto .photo__block {
-    width: 250px;
-    height: 250px;
+    width: 180px;
+    height: 180px;
     border: 2px dotted #DCDCDC;
     margin: 20px auto;
     border-radius: 15px;

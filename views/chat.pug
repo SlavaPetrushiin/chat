@@ -23,8 +23,11 @@
             <div class="uploadPhoto__block">
                 <div class="photo__block"></div>
                 <div class="photo__btn">
-                    <button class="btn__photo btn__close">Отмена</button>
-                    <button class="btn__photo btn__load">Загрузить</button>
+                    <form action="/upload" method="post" enctype="multipart/form-data">
+                        <input class="get__file" type="file" name="filedata" /><br><br>
+                        <button class="btn__photo btn__close">Отмена</button>
+                        <button class="btn__photo btn__load">Загрузить</button>
+                    </form>    
                 </div>
             </div>
         </div>         

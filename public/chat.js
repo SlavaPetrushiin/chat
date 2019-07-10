@@ -9,7 +9,6 @@ window.onload = function(){
     const loadWindowPhoto = document.querySelector('.uploadPhoto');
     const closeloadWindowPhoto = document.querySelector('.btn__close');
     const loadBtn = document.querySelector('.btn__load');
-    console.log(closeloadWindowPhoto)
     
     const btn = document.querySelector('.btn');
     btn.addEventListener('click', (e) => {
@@ -58,7 +57,7 @@ window.onload = function(){
         reader.onload = function(){
             area.style.backgroundImage = `url(${reader.result})`;
         };
-        loadBtn.addEventListener('click', function(e){
+        loadBtn.addEventListener('submit', function(e){
             e.preventDefault();
             sendPhoto(files[0]);
         })
@@ -71,19 +70,21 @@ window.onload = function(){
     
     function sendPhoto(files){
         console.log(files);
+        
+
         const form = new FormData();
         form.append(`${socket.id}`, files);
         
-        fetch('/index.js', {
-            method: 'PUT',
-            headers: {
-                        'Content-Type': 'application/json',
-                    },            
-            body: form
-        })
-        .then(response => response.formData())
-        .catch(error => console.error('Ошибка:', error))
-        .then(response => console.log('Успех:', response));
+//        fetch('/upload', {
+//            method: 'PUT',
+//            headers: {
+//                        'Content-Type': 'application/json',
+//                    },            
+//            body: form
+//        })
+//        .then(response => response.formData())
+//        .catch(error => console.error('Ошибка:', error))
+//        .then(response => console.log('Успех:', response));
     };
     
     function creatMessage(msg){

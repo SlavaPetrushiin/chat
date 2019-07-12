@@ -1,45 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Chat</title>
-    <link href="/normalize.css" rel="stylesheet" type="text/css"/>    
-    <link rel="stylesheet" href="/chat.css" type="text/css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.dev.js"></script>
-</head>
-<body>
- 
-   <div class="container">
-       <div class="users__niks">
-            <div class="user__info">
-                <div class="user__info-photo user__photo"></div>
-                <p class="name">#{name}</p>
-            </div>
-            <ul class="users"></ul>
-       </div>
-       <div class="users__messages">
-        <div class="uploadPhoto">
-            <p class="uploadPhoto__text">Загрузка фото</p>
-            <div class="uploadPhoto__block">
-                <div class="photo__block"></div>
-                <div class="photo__btn">
-                    <form action="/upload" method="post" enctype="multipart/form-data">
-                        <input class="get__file" type="file" name="filedata" /><br><br>
-                        <button class="btn__photo btn__close">Отмена</button>
-                        <button class="btn__photo btn__load">Загрузить</button>
-                    </form>    
-                </div>
-            </div>
-        </div>         
-           <ul id="messages" class="message__field"></ul>
-            <form action="" class="message__send">
-                <input id="m" autocomplete="off" class="mess" placeholder="Введите сообщение"/>
-                <button class="btn">Отправить</button>
-            </form>           
-       </div>
-   </div>
-    
-    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script src="/chat.js"></script>
-</body>
-</html>
+doctype html
+html
+    head
+        title Регистрация
+        meta(charset='utf-8')
+        meta(name="viewport", content="width=device-width, initial-scale=1, minimum-scale=0.5, maximum-scale=2.0")        
+        link(href="/normalize.css" rel="stylesheet" type="text/css")
+        link(href="/style.css" rel="stylesheet" type="text/css")
+        link(rel="stylesheet" href="/chat.css" type="text/css")
+        script(src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.dev.js")
+    body 
+        div.container
+            div.users__niks
+                div.user__info
+                    .div.user__info-photo.user__photo
+                    p.name #{name}
+                ul.users
+            div.users__messages
+                div.uploadPhoto
+                    p.uploadPhoto__text Загрузка фото
+                    div.uploadPhoto__block
+                        div.photo__block
+                        div.photo__btn
+                            form(action="/upload" method="post" enctype="multipart/form-data")
+                                input(type="file" name="filedata").get__file 
+                                button.btn__photo.btn__close Отмена
+                                button.btn__photo.btn__load Загрузить
+                ul#messages.message__field
+                form(action="").message__send
+                    input(autocomplete="off" class="mess" placeholder="Введите сообщение")#m 
+                    button.btn Отправить
+        script(src="/chat.js")

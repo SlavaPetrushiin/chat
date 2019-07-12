@@ -2,10 +2,10 @@ const form = document.querySelector('.authorization__form');
 const enter = document.querySelector('.authorization__btn');
 let authorization = false;
 let userJS;
-let flag = false;
 
 enter.addEventListener('click', (e) => {
     e.preventDefault();
+    let flag = false;
     const userName = form.name.value;
     const userNik = form.nik.value;    
     
@@ -34,18 +34,19 @@ enter.addEventListener('click', (e) => {
                         userJS = '';
                     } else {
                         alert('Пользователь с таким ником уже существует! Введите новый ник!');
+                        flag = true;
                         userJS = '';
                     }
                 }
             });
-        
-            if (!flag){
+
+            if (flag === false){
                 userJS = {
                     name: userName,
                     nik: userNik,
                     authorization: false
                 };
-                ajax("/", "POST", f1, requestData(userJS));        
+                ajax("/", "POST", f1, requestData(userJS));  
             }
 
             document.querySelectorAll(".input").forEach(item => {
@@ -53,7 +54,7 @@ enter.addEventListener('click', (e) => {
             });
             userJS = '';
 
-            flag = false;        
+  
         })
         .catch(console.log.bind(console));    
 });
@@ -67,22 +68,22 @@ function ajax(url, method, functionName, dataArray){
 
     xhttp.onreadystatechange = function(){
         if (this.readyState == 4 && this.status == 200){
-            functionName(this.response);
+                functionName(this.response);
             }
         }            
 }
         
 function requestData(dataArray){
     let out = JSON.stringify(dataArray);
-    console.log(out);
     return out;
 }
     
 function f1(data){
-    const body = document.body;
-    body.innerHTML = data;
+    let getInfo = JSON.parse(data);
+    let getSend = '';
+    for(let key in getInfo){
+        getSend +=`${key}=${getInfo[key]}&`
+    }
+    window.location.href = `/chat?${getSend}`;
 }
-        
-
-        
 

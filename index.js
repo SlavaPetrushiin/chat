@@ -28,12 +28,11 @@ const io = socket(server);
 
 app.post("/", jsonParser, function (request, response) {
     if(!request.body) return response.sendStatus(400);
-    connections.push({name: request.body.name,  nik: request.body.nik});
+    console.log(request.body)
     
     const userName = request.body.name;
     const userNik = request.body.nik;
     const  authorization = request.body.authorization;
-    console.log(userName, userNik, authorization)
     
     if (authorization === false){
         var userInfo = {name: userName, nik: userNik};
@@ -48,15 +47,8 @@ app.post("/", jsonParser, function (request, response) {
         var data = JSON.stringify(users);
         // перезаписываем файл с новыми данными
         fs.writeFileSync("users.json", data);  
-        
-        //response.json(request.body)
     }
-
-    
-    response.render("chat", {
-        name: request.body.name,
-        nik: request.body.nik
-    })
+    response.json({name: userName,  nik: userNik});
 });
   
 app.get("/", function(request, response){
@@ -69,32 +61,45 @@ app.get("/users.json", function(request, response){
     response.send(data)
 });
 
-
-const storageConfig = multer.diskStorage({
-    destination: (req, file, cb) =>{
-        cb(null, "uploads");
-    },
-    filename: (req, file, cb) =>{
-        cb(null, file.originalname);
-    }
-});
-
-app.use(multer({storage:storageConfig}).single("filedata"));
-app.post("/upload", upload.single("filedata"), function (req, res, next) {
-   
-    let filedata = req.file;
- 
-    console.log(filedata);
-    if(!filedata)
-        res.send("Ошибка при загрузке файла");
-    else
-        res.send(filedata.path);
+app.get("/chat", function(request, response){
+    let userNik = request.query.nik;
+    let userName = request.query.name;
+    
+    connections.push({name: userName,  nik:  userNik});
+    console.log(connections)        
+    
+    response.render("chat", {
+        name: userName,
+        nik: userNik
+    })
 });
 
 
+//const storageConfig = multer.diskStorage({
+//    destination: (req, file, cb) =>{
+//        cb(null, "uploads");
+//    },
+//    filename: (req, file, cb) =>{
+//        cb(null, file.originalname);
+//    }
+//});
+//
+//app.use(multer({storage:storageConfig}).single("filedata"));
+//app.post("/upload", upload.single("filedata"), function (req, res, next) {
+//   
+//    let filedata = req.file;
+// 
+//    console.log(filedata);
+//    if(!filedata)
+//        res.send("Ошибка при загрузке файла");
+//    else
+//        res.send(filedata.path);
+//});
 
 
 
+
+console.log(connections)
 
 
 
@@ -102,7 +107,9 @@ io.on('connection', function(socket){
 //    const id = socket.id;
     console.log("Успешное соединение");
 //    connections[count].id = id;
-//    count++;
+    console.log(connections)
+
+    count++;
     io.emit('connectionUser', connections);
     
 	socket.on('disconnect', function(data) {
@@ -110,7 +117,7 @@ io.on('connection', function(socket){
 //        const indexOf = disconnectUser(connections, id);
 //		connections.splice(indexOf, 1);
 		console.log("Отключились");
-//        count--;
+        //count--;
         io.emit('disconnectUser', connections);
 	});    
     

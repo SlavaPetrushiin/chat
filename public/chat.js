@@ -1,7 +1,5 @@
-const socket = io.connect('http://localhost:3001');
-console.log(socket)
-
 window.onload = function(){
+    const socket = io.connect('http://localhost:3001');
     const messages = document.querySelector('#messages');
     const users = document.querySelector('.users');
     const usersPhoto = document.querySelector('.user__info-photo');
@@ -103,6 +101,7 @@ window.onload = function(){
     }
 
     function userConnectDiscon(data){
+        console.log(data)
         users.textContent = `Участники (${data.length})`;
         data.forEach(item => {
             const li = document.createElement('li');
@@ -110,9 +109,14 @@ window.onload = function(){
             li.textContent = item.name;
             users.appendChild(li);
         });    
-    }    
+    }      
+}    
+     
     
-}
+    
+
+    
+
 
 
 
